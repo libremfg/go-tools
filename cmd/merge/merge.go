@@ -23,7 +23,9 @@ func init() {
 
 func main() {
 
-	if verbose {
+	fmt.Println(os.Args)
+
+	if !verbose {
 		fmt.Printf("called with directory=%s, extension=%s, output=%s\n", dir, extensions, output)
 	}
 
