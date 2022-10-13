@@ -5,8 +5,8 @@ for item in $(cat targets.txt);do
     ARCH=$(echo $item | cut -d ":" -f2)
     echo "Building $PLATFORM $ARCH"
     if [ "windows" = $PLATFORM ]; then
-      env GOARCH=$ARCH GOOS=$PLATFORM go build -o ./builds/sort-schema-v0.1.0-$PLATFORM-$ARCH.exe ./sortSchema.go
+      env GOARCH=$ARCH GOOS=$PLATFORM go build -o ./builds/merge-v0.1.0-$PLATFORM-$ARCH.exe ./merge.go
     else
-      env GOARCH=$ARCH GOOS=$PLATFORM go build -o ./builds/sort-schema-v0.1.0-$PLATFORM-$ARCH ./sortSchema.go
+      env GOARCH=$ARCH GOOS=$PLATFORM go build -o ./builds/merge-v0.1.0-$PLATFORM-$ARCH ./merge.go
     fi
 done
