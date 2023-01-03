@@ -70,6 +70,12 @@ Options:
 			panic(msg)
 		}
 
+		if len(respBody.Errors) > 0 {
+			errString, _ := json.Marshal(respBody.Errors)
+			msg := fmt.Sprintf("GraphQL Response had errors:\n%s", errString)
+			fmt.Println(msg)
+		}
+
 		respBody.Sort()
 
 		ordered, err := json.Marshal(respBody)
