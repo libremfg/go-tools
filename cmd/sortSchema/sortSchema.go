@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"os"
 	"time"
@@ -49,6 +49,7 @@ Options:
 	}
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+
 		contentType := r.Header.Get("Content-Type")
 		resp, err := http.Post(endpoint+r.URL.Path, contentType, r.Body)
 		if err != nil {
@@ -56,7 +57,7 @@ Options:
 			panic(msg)
 		}
 
-		body, err := ioutil.ReadAll(resp.Body)
+		body, err := io.ReadAll(resp.Body)
 		if err != nil {
 			msg := fmt.Sprintf("Failed to convert Body: %s", err)
 			panic(msg)
@@ -95,7 +96,7 @@ Options:
 	})
 
 	addr := "0.0.0.0:8081"
-	fmt.Printf("Listeing on %s\n", addr)
+	fmt.Printf("Listening on %s\n", addr)
 	if err := http.ListenAndServe(addr, nil); err != nil {
 		fmt.Println(err)
 	}
