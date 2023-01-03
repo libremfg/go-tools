@@ -2,7 +2,7 @@
 
 > http proxy a graphql schema request and returns a sorted schema
 
-Useful for committing schema files under version control. 
+Useful for committing schema files under version control. SchemaSort can also proxy the _service sdl request, but is not sorted.
 
 ```
 Options: 
@@ -19,7 +19,7 @@ Options:
 
 ```
 $ ./sort-schema-v1.0.0.-windows-amd64.exe
-Listeing on 0.0.0.0:8081
+Listening on 0.0.0.0:8081
 
 ```
 

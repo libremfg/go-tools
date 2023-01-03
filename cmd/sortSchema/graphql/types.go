@@ -7,8 +7,22 @@ import (
 
 // The Response from the GraphQL Server
 type Response struct {
-	Data       Data       `json:"data"`
-	Extensions Extensions `json:"extensions"`
+	Errors     []GraphQLError `json:"errors,omitempty"`
+	Data       Data           `json:"data"`
+	Extensions Extensions     `json:"extensions"`
+}
+
+// GraphQL Error
+type GraphQLError struct {
+	Message   string     `json:"message"`
+	Locations []Location `json:"location,omitempty"`
+	Path      []string   `json:"path,omitempty"`
+}
+
+// Location of the graphQL Error in the requested document
+type Location struct {
+	Line   int64 `json:"line"`
+	Column int64 `json:"column"`
 }
 
 // Sort the Response
@@ -18,7 +32,12 @@ func (r *Response) Sort() {
 
 // The Data response
 type Data struct {
-	Schema __Schema `json:"__schema"`
+	Schema  __Schema `json:"__schema,omitempty"`
+	Service _Service `json:"_service,omitempty"`
+}
+
+type _Service struct {
+	SDL *string `json:"sdl,omitempty"`
 }
 
 // The schema introspection system is accessible from the meta‐fields __schema
